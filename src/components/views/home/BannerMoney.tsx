@@ -14,9 +14,14 @@ export default function BannerMoney() {
         className="overflow-hidden -z-20"
       />
       <div className="text-white flex justify-between items-end absolute bottom-7 px-5 w-full">
-        <div>
-          <h4>Money </h4>
-          <span className="text-xl font-bold">Rp. 55.000</span>
+        <div className="flex flex-col justify-center gap-y-3">
+          <div>
+            <h4 className="font-bold text-lg">Raisya Ariana Asfriansah</h4>
+          </div>
+          <div>
+            <h4>Money</h4>
+            <span className="text-xl font-bold">Rp. 55.000</span>
+          </div>
         </div>
         <div>
           <Link href={"/topup"}>

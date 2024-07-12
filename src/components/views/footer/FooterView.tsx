@@ -1,5 +1,4 @@
 "use client";
-import ItemFooter from "@/components/ItemFooter";
 import { IoHomeOutline } from "react-icons/io5";
 import { TbCup } from "react-icons/tb";
 import { CiCreditCard1 } from "react-icons/ci";
@@ -10,7 +9,7 @@ import Link from "next/link";
 
 export default function FooterView() {
   const styleIcon =
-    "text-4xl font-bold outline-none border-none active:outline-none active:border-none";
+    "text-3xl font-bold outline-none border-none active:outline-none active:border-none";
 
   const url = usePathname();
 

@@ -31,7 +31,9 @@ const config = {
         darkGreen: "#1D4D4F",
         dark: "#2E2D38",
         mainGreen: "#4AA366",
+        lightGrey: "#B4BBCB",
         grey: "#6F8094",
+        darkGrey: "#4D5661",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
