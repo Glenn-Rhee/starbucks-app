@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import ButtonBuy from "@/components/ButtonBuy";
 import Image from "next/image";
 
 export default function CardRecomendation() {
@@ -22,9 +22,7 @@ export default function CardRecomendation() {
           </span>
         </div>
         <div className="w-full mt-4">
-          <Button className="w-full rounded-xl hover:bg-[#26723E] bg-mainGreen text-white">
-            Buy
-          </Button>
+          <ButtonBuy className="w-full rounded-xl">Buy</ButtonBuy>
         </div>
       </div>
     </div>

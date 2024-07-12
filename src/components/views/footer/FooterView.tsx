@@ -1,11 +1,11 @@
 "use client";
 import { IoHomeOutline } from "react-icons/io5";
 import { TbCup } from "react-icons/tb";
-import { CiCreditCard1 } from "react-icons/ci";
 import { CgProfile } from "react-icons/cg";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { TiDocumentText } from "react-icons/ti";
 
 export default function FooterView() {
   const styleIcon =
@@ -32,11 +32,11 @@ export default function FooterView() {
         />
       </Link>
 
-      <Link href={"/topup"}>
-        <CiCreditCard1
+      <Link href={"/transaction"}>
+        <TiDocumentText
           className={cn(
             styleIcon,
-            url === "/topup" ? "text-darkGreen" : "text-grey"
+            url === "/transaction" ? "text-darkGreen" : "text-grey"
           )}
         />
       </Link>

@@ -1,7 +1,13 @@
+// @refresh reset
+import Container from "@/components/Container";
+import Menu from "@/components/views/order/Menu";
+import PickupPoint from "@/components/views/order/PickupPoint";
+
 export default function OrderPage() {
   return (
-    <div>
-      <h1>Order Page</h1>
-    </div>
+    <Container>
+      <PickupPoint />
+      <Menu />
+    </Container>
   );
 }
