@@ -1,7 +1,11 @@
+// @refresh reset
+import Container from "@/components/Container";
+import Search from "@/components/views/transaction/Search";
+
 export default function TransactionPage() {
   return (
-    <div>
-      <h1>Transaction Page</h1>
-    </div>
+    <Container>
+      <Search />
+    </Container>
   );
 }

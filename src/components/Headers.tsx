@@ -15,22 +15,33 @@ import { usePathname } from "next/navigation";
 
 export default function Headers() {
   const pathName = usePathname();
+  let title;
+  switch (pathName) {
+    case "/transaction":
+      title = "Transaction";
+      break;
+    case "/order":
+      title = "Order";
+      break;
+    default:
+      title = "Starbucks";
+      break;
+  }
+
   const iconStyles =
     "text-2xl text-darkGreen font-semibold outline-none border-none active:outline-none active:border-none";
 
   return (
     <header className="flex justify-between w-screen px-4 py-3 z-50 items-center bg-white shadow-lg shadow-black/15 rounded-lg sticky top-0">
       <div>
-        <h1 className="text-darkGreen font-bold text-2xl">
-          {pathName !== "/order" ? "Starbucks" : "Order"}
-        </h1>
+        <h1 className="text-darkGreen font-bold text-2xl">{title}</h1>
       </div>
       <div className="flex gap-x-3">
         <div>
           <FaRegBell className={iconStyles} />
         </div>
         <div className="">
-          <DropdownMenu >
+          <DropdownMenu>
             <DropdownMenuTrigger>
               <HiDotsVertical className={iconStyles} />
             </DropdownMenuTrigger>
