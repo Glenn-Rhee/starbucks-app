@@ -5,11 +5,15 @@ import { CiSearch } from "react-icons/ci";
 import {
   Dialog,
   DialogContent,
-  DialogHeader,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useState } from "react";
 import Option from "@/components/Option";
+import FilterItem from "./FilterItem";
+import { RadioGroup } from "@/components/ui/radio-group";
+import RadioItem from "./RadioItem";
+import ButtonBuy from "@/components/ButtonBuy";
+
 export default function Search() {
   const [open, setOpen] = useState<boolean>(false);
   const optionTransaction = ["All", "Completed", "In Progress", "Cancelled"];
@@ -33,14 +37,34 @@ export default function Search() {
             <CiFilter className="font-bold text-xl" />
           </button>
         </DialogTrigger>
-        <DialogContent>
-          <h3 className="text-dark font-semibold text-xl">
-            Transaction Status
-          </h3>
-          <Option
-            data={optionTransaction}
-            initiateValue={optionTransaction[0]}
-          />
+        <DialogContent className="bg-white">
+          <FilterItem title="Transaction Status">
+            <Option
+              data={optionTransaction}
+              initiateValue={optionTransaction[0]}
+            />
+          </FilterItem>
+          <FilterItem title="Date">
+            <RadioGroup defaultValue="Last 7 Days" className="mt-2">
+              <RadioItem value="Last 7 Days" id="r1" />
+              <RadioItem value="Last 30 Days" id="r2" />
+              <RadioItem value="Last 90 Days" id="r3" />
+            </RadioGroup>
+          </FilterItem>
+          <FilterItem title="Sort">
+            <RadioGroup defaultValue="Newest" className="mt-2">
+              <RadioItem value="Newest" id="r4" />
+              <RadioItem value="Oldest" id="r5" />
+            </RadioGroup>
+          </FilterItem>
+          <div className="w-full border-t border-darkGrey/40 flex justify-center items-center">
+            <div className="flex justify-between items-center w-full mt-2">
+              <ButtonBuy className="w-[48%] rounded-[8px] bg-white border-mainGreen text-mainGreen border font-semibold hover:bg-mainGreen hover:text-white">
+                Reset
+              </ButtonBuy>
+              <ButtonBuy className="w-[48%] font-semibold rounded-[8px]">Apply</ButtonBuy>
+            </div>
+          </div>
         </DialogContent>
       </Dialog>
     </div>
