@@ -10,7 +10,7 @@ export default function FilterItem(props: FilterItemProps) {
   return (
     <div
       className={cn(
-        "flex flex-col justify-center mb-3 overflow-auto",
+        "flex flex-col justify-center mb-3 first:overflow-auto overflow-hidden",
         className
       )}
     >
