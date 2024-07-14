@@ -29,12 +29,12 @@ export default function Headers() {
   }
 
   const iconStyles =
-    "text-2xl text-darkGreen font-semibold outline-none border-none active:outline-none active:border-none";
+    "text-xl text-darkGreen font-semibold outline-none border-none active:outline-none active:border-none";
 
   return (
     <header className="flex justify-between w-screen px-4 py-3 z-50 items-center bg-white shadow-lg shadow-black/15 rounded-lg sticky top-0">
       <div>
-        <h1 className="text-darkGreen font-bold text-2xl">{title}</h1>
+        <h1 className="text-darkGreen font-bold text-xl">{title}</h1>
       </div>
       <div className="flex gap-x-3">
         <div>

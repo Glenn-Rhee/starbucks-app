@@ -5,6 +5,7 @@ import { CiSearch } from "react-icons/ci";
 import {
   Dialog,
   DialogContent,
+  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useState } from "react";
@@ -32,12 +33,13 @@ export default function Search() {
         <DialogTrigger asChild>
           <button
             type="button"
-            className="w-[15%] h-full bg-mainGreen shadow-sm rounded-[8px] text-white flex py-[10px] items-center justify-center"
+            className="w-[15%] h-full bg-mainGreen shadow-md shadow-dark/25 rounded-[8px] text-white flex py-[10px] items-center justify-center"
           >
             <CiFilter className="font-bold text-xl" />
           </button>
         </DialogTrigger>
         <DialogContent className="bg-white">
+          <DialogTitle className="text-darkGreen text-2xl font-semibold text-center">Filter History</DialogTitle>
           <FilterItem title="Transaction Status">
             <Option
               data={optionTransaction}
@@ -62,7 +64,9 @@ export default function Search() {
               <ButtonBuy className="w-[48%] rounded-[8px] bg-white border-mainGreen text-mainGreen border font-semibold hover:bg-mainGreen hover:text-white">
                 Reset
               </ButtonBuy>
-              <ButtonBuy className="w-[48%] font-semibold rounded-[8px]">Apply</ButtonBuy>
+              <ButtonBuy className="w-[48%] font-semibold rounded-[8px]">
+                Apply
+              </ButtonBuy>
             </div>
           </div>
         </DialogContent>

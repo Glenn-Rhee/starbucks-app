@@ -22,7 +22,7 @@ export default function CardRecomendation() {
           </span>
         </div>
         <div className="w-full mt-4">
-          <ButtonBuy className="w-full rounded-xl">Buy</ButtonBuy>
+          <ButtonBuy className="w-full rounded-xl">Add</ButtonBuy>
         </div>
       </div>
     </div>

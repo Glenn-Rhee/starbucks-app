@@ -14,7 +14,7 @@ export default function FilterItem(props: FilterItemProps) {
         className
       )}
     >
-      <h3 className="text-dark font-semibold text-xl">{title}</h3>
+      <h3 className="text-dark font-semibold text-lg">{title}</h3>
       {children}
     </div>
   );

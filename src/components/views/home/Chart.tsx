@@ -81,7 +81,7 @@ export default function Chart() {
                   {started.toLocaleString()}
                 </span>
               </div>
-              <span className="font-semibold">Started</span>
+              <span className="font-semibold">Favorited</span>
             </div>
             <div className="flex flex-col items-center justify-center">
               <div className="flex items-center gap-x-2">

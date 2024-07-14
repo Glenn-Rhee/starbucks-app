@@ -16,11 +16,11 @@ export default function BannerMoney() {
       <div className="text-white flex justify-between items-end absolute bottom-7 px-5 w-full">
         <div className="flex flex-col justify-center gap-y-3">
           <div className="w-full">
-            <h4 className="font-bold text-lg">Raisya Ariana Asfriansah</h4>
+            <h4 className="font-semibold text-base">Raisya Ariana Asfriansah</h4>
           </div>
           <div>
-            <h4>Money</h4>
-            <span className="text-xl font-bold">Rp. 55.000</span>
+            <h4>Balance</h4>
+            <span className="text-lg font-semibold">Rp. 55.000</span>
           </div>
         </div>
         <div>

@@ -14,10 +14,13 @@ export default function Recomendation() {
     <Card className="mt-5 mb-16 px-4 py-4">
       <div className="flex justify-between items-center text-darkGreen">
         <div>
-          <h2 className="font-bold text-xl">Recomendation</h2>
+          <h2 className="font-bold text-xl">For You</h2>
         </div>
         <div>
-          <Link href={"/order"} className="flex items-center gap-x-2 text-sm">
+          <Link
+            href={"/order"}
+            className="flex items-center gap-x-2 text-sm text-darkGreen"
+          >
             See more
             <span>
               <FaArrowRight />
