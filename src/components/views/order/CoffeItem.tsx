@@ -1,5 +1,9 @@
+"use client";
 import ButtonBuy from "@/components/ButtonBuy";
+import HandlerCoffe from "@/components/HandlerCoffe";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { useState } from "react";
 
 interface CoffeItemProps {
   title: string;
@@ -9,6 +13,8 @@ interface CoffeItemProps {
 
 export default function CoffeItem(props: CoffeItemProps) {
   const { title, description, price } = props;
+  const [active, setActive] = useState<boolean>(false);
+
   return (
     <div className="min-w-full py-1 px-2 flex gap-x-2 mt-5 g-red-900">
       <div className="flex gap-x-4 min-w-full">
@@ -21,8 +27,22 @@ export default function CoffeItem(props: CoffeItemProps) {
             <p className="">{description}</p>
             <span className="">Rp {price.toLocaleString()}</span>
           </div>
-          <div className="w-full flex justify-end mt-1">
-            <ButtonBuy className="rounded-[10px] min-w-[6rem]">Buy</ButtonBuy>
+          <div
+            className={cn("w-full flex gap-x-2 mt-2", {
+              "justify-center": active,
+              "justify-end": !active,
+            })}
+          >
+            {active ? (
+              <HandlerCoffe setActive={setActive} />
+            ) : (
+              <ButtonBuy
+                onClick={() => setActive(true)}
+                className="rounded-[10px] min-w-[6rem]"
+              >
+                Buy
+              </ButtonBuy>
+            )}
           </div>
         </div>
       </div>

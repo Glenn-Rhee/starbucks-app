@@ -14,6 +14,7 @@ import FilterItem from "./FilterItem";
 import { RadioGroup } from "@/components/ui/radio-group";
 import RadioItem from "./RadioItem";
 import ButtonBuy from "@/components/ButtonBuy";
+import SearchContent from "@/components/SearchContent";
 
 export default function Search() {
   const [open, setOpen] = useState<boolean>(false);
@@ -21,14 +22,7 @@ export default function Search() {
 
   return (
     <div className="w-full flex items-center gap-x-2 mt-4">
-      <div className="w-[85%] bg-white flex items-center rounded-[9px] px-2 shadow-md py-[0.5px]">
-        <CiSearch className="text-md text-darkGrey" />
-        <Input
-          type="text"
-          placeholder="Search Transaction"
-          className="bg-transparent border-none placeholder:text-darkGrey text-darkGrey"
-        />
-      </div>
+      <SearchContent placeholder="Search transaction" />
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <button
@@ -39,7 +33,9 @@ export default function Search() {
           </button>
         </DialogTrigger>
         <DialogContent className="bg-white">
-          <DialogTitle className="text-darkGreen text-2xl font-semibold text-center">Filter History</DialogTitle>
+          <DialogTitle className="text-darkGreen text-2xl font-semibold text-center">
+            Filter History
+          </DialogTitle>
           <FilterItem title="Transaction Status">
             <Option
               data={optionTransaction}

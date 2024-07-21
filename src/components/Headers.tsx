@@ -12,6 +12,7 @@ import { IoIosLogOut } from "react-icons/io";
 import { MdOutlineLightMode } from "react-icons/md";
 import DropDownItem from "./DropDownItem";
 import { usePathname } from "next/navigation";
+import { IoCartOutline } from "react-icons/io5";
 
 export default function Headers() {
   const pathName = usePathname();
@@ -37,9 +38,7 @@ export default function Headers() {
         <h1 className="text-darkGreen font-bold text-xl">{title}</h1>
       </div>
       <div className="flex gap-x-3">
-        <div>
-          <FaRegBell className={iconStyles} />
-        </div>
+        <IoCartOutline className={iconStyles} />
         <div className="">
           <DropdownMenu>
             <DropdownMenuTrigger>
