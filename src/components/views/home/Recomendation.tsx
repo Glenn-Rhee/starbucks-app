@@ -28,7 +28,12 @@ export default function Recomendation() {
           </Link>
         </div>
       </div>
-      <Carousel>
+      <div className="flex gap-x-2 overflow-x-auto">
+        <CardRecomendation />
+        <CardRecomendation />
+        <CardRecomendation />
+      </div>
+      {/* <Carousel>
         <CarouselContent>
           <CarouselItem className="flex gap-x-2">
             <CardRecomendation />
@@ -39,7 +44,7 @@ export default function Recomendation() {
             <CardRecomendation />
           </CarouselItem>
         </CarouselContent>
-      </Carousel>
+      </Carousel> */}
     </Card>
   );
 }

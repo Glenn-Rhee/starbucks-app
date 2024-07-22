@@ -1,17 +1,16 @@
 "use client";
 import ButtonBuy from "@/components/ButtonBuy";
+import HandlerCoffe from "@/components/HandlerCoffe";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { useState } from "react";
-import { IoMdCheckmark } from "react-icons/io";
 
 export default function CardRecomendation() {
-  const [qty, setQty] = useState<number>(1);
   const [active, setActive] = useState<boolean>(false);
 
   return (
-    <div className="flex items-center gap-x-2 mt-5">
-      <div className="bg-lightGrey/60 rounded-2xl p-3 max-w-[180px] ">
+    <div className="flex items-center mt-5 flex-1 min-w-[13rem] ">
+      <div className="bg-lightGrey/60 rounded-2xl min-w-full p-4 h-fit">
         <Image
           src={"/coffe.png"}
           className="aspect-square mx-auto"
@@ -30,32 +29,12 @@ export default function CardRecomendation() {
         </div>
         <div
           className={cn(
-            "w-full mt-4 mb-2",
+            "w-full mt-4 mb-4",
             active ? "flex justify-center items-center gap-x-2" : ""
           )}
         >
           {active ? (
-            <>
-              <div className="flex justify-around items-center flex-1 text-dark bg-lightGrey rounded-[4px]">
-                <button
-                  className="px-1"
-                  onClick={() => (qty < 2 ? null : setQty(qty - 1))}
-                >
-                  -
-                </button>
-                <span className="text-sm">{qty}</span>
-                <button className="px-1" onClick={() => setQty(qty + 1)}>
-                  +
-                </button>
-              </div>
-              <button
-                type="button"
-                className="bg-mainGreen p-1 rounded-[5px]"
-                onClick={() => setActive(false)}
-              >
-                <IoMdCheckmark className="text-white" />
-              </button>
-            </>
+            <HandlerCoffe setActive={setActive} className="w-full gap-x-0" />
           ) : (
             <ButtonBuy
               className="w-full rounded-xl"

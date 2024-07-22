@@ -16,10 +16,10 @@ export default function CoffeItem(props: CoffeItemProps) {
   const [active, setActive] = useState<boolean>(false);
 
   return (
-    <div className="min-w-full py-1 px-2 flex gap-x-2 mt-5 g-red-900">
+    <div className="min-w-full py-1 px-2 flex gap-x-2 mt-5 g-red-900 mb-1">
       <div className="flex gap-x-4 min-w-full">
         <div className="flex-grow">
-          <Image src={"/coffe.png"} width={100} height={100} alt={"Coffe"} />
+          <Image src={"/coffe.png"} width={60} height={60} alt={"Coffe"} />
         </div>
         <div className=" w-[70%] flex-grow-[2]">
           <h4 className="text-dark text-lg font-semibold">{title}</h4>
@@ -28,7 +28,7 @@ export default function CoffeItem(props: CoffeItemProps) {
             <span className="">Rp {price.toLocaleString()}</span>
           </div>
           <div
-            className={cn("w-full flex gap-x-2 mt-2", {
+            className={cn("w-full flex gap-x-2 mt-2 items-center", {
               "justify-center": active,
               "justify-end": !active,
             })}
