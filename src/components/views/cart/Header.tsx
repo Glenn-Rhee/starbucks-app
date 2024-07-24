@@ -3,7 +3,7 @@ import { FaArrowLeft } from "react-icons/fa";
 
 export default function HeaderCart() {
   return (
-    <div className="min-w-full px-2 py-2 sticky bg-white flex justify-center items-center">
+    <div className="min-w-full px-2 py-2 top-0 shadow-sm shadow-dark/25 sticky bg-white flex justify-center items-center">
       <Link
         className="flex items-center absolute left-2 justify-center p-2"
         href={"/"}

@@ -19,7 +19,7 @@ export default function Address() {
         />
         <label
           htmlFor="address"
-          className="text-mainGreen cursor-pointer text-sm hover:underline"
+          className="text-mainGreen cursor-pointer text-xs hover:underline"
         >
           Edit
         </label>

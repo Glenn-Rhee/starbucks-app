@@ -33,18 +33,6 @@ export default function Recomendation() {
         <CardRecomendation />
         <CardRecomendation />
       </div>
-      {/* <Carousel>
-        <CarouselContent>
-          <CarouselItem className="flex gap-x-2">
-            <CardRecomendation />
-            <CardRecomendation />
-          </CarouselItem>
-          <CarouselItem className="flex gap-x-2">
-            <CardRecomendation />
-            <CardRecomendation />
-          </CarouselItem>
-        </CarouselContent>
-      </Carousel> */}
     </Card>
   );
 }
