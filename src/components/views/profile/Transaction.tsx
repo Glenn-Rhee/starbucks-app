@@ -11,7 +11,7 @@ export default function Transaction(props: TransactionProps) {
   const { label, balance, className } = props;
 
   return (
-    <div className={cn("flex justify-start bg-ed-900 min-w-[50%]", className)}>
+    <div className={cn("flex justify-start min-w-[50%]", className)}>
       <div className="flex gap-x-4 items-center">
         <div
           className={cn(

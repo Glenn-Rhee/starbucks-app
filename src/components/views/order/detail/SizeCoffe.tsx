@@ -24,7 +24,7 @@ export default function SizeCoffe(props: SizeCoffeProps) {
       <span
         className={cn(
           "text-xs text-darkGrey/95 absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center font-light",
-          valueActive === title.toUpperCase() ? "text-darkGreen" : ""
+          valueActive === title.toUpperCase() ? "text-mainGreen font-semibold" : ""
         )}
       >
         {title.toUpperCase()}
