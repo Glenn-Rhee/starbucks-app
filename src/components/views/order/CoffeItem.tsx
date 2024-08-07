@@ -1,9 +1,7 @@
 "use client";
-import ButtonBuy from "@/components/ButtonBuy";
-import HandlerCoffe from "@/components/HandlerCoffe";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { useState } from "react";
+import Link from "next/link";
 
 interface CoffeItemProps {
   title: string;
@@ -13,10 +11,12 @@ interface CoffeItemProps {
 
 export default function CoffeItem(props: CoffeItemProps) {
   const { title, description, price } = props;
-  const [active, setActive] = useState<boolean>(false);
 
   return (
-    <div className="min-w-full py-1 px-2 flex gap-x-2 mt-5 g-red-900 mb-1">
+    <Link
+      href={"/order/4"}
+      className="min-w-full py-1 px-2 flex gap-x-2 mt-5 g-red-900 mb-1"
+    >
       <div className="flex gap-x-4 min-w-full">
         <div className="flex-grow">
           <Image src={"/coffe.png"} width={60} height={60} alt={"Coffe"} />
@@ -27,25 +27,20 @@ export default function CoffeItem(props: CoffeItemProps) {
             <p className="">{description}</p>
             <span className="">Rp {price.toLocaleString()}</span>
           </div>
-          <div
-            className={cn("w-full flex gap-x-2 mt-2 items-center", {
-              "justify-center": active,
-              "justify-end": !active,
-            })}
-          >
-            {active ? (
-              <HandlerCoffe setActive={setActive} />
-            ) : (
-              <ButtonBuy
-                onClick={() => setActive(true)}
-                className="rounded-[10px] min-w-[6rem]"
-              >
-                Buy
-              </ButtonBuy>
-            )}
+          {/* <div
+            className={cn("w-full flex gap-x-2 mt-2 items-center justify-end")}
+          > */}
+          {/* <Link href={"/order/4"} className="rounded-[10px] min-w-[6rem]">
+            Buy
+          </Link> */}
+          {/* </div> */}
+          <div className="w-full flex gap-x-2 mt-2 items-center justify-end">
+            <span className="rounded-[10px] bg-mainGreen text-white flex items-center justify-center py-1 w-1/2">
+              Buy
+            </span>
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

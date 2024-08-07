@@ -14,6 +14,7 @@ export default function Menu() {
     { title: "Expresso Hot", description: "With Whipped Milk", price: 25000 },
     { title: "Expresso Hot", description: "With Whipped Milk", price: 25000 },
   ];
+  
   return (
     <div className="mt-3 mb-20">
       <h3 className="text-lg font-semibold text-dark">Menu</h3>

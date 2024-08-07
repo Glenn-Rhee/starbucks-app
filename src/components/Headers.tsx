@@ -36,12 +36,12 @@ export default function Headers() {
   if (pathName === "/cart") {
     return null;
   }
- 
+
   return (
     <header className="flex justify-between w-screen px-4 py-3 z-50 items-center bg-white shadow-lg shadow-black/15 rounded-lg sticky top-0">
-      <div>
+      <Link href={"/"}>
         <h1 className="text-darkGreen font-bold text-xl">{title}</h1>
-      </div>
+      </Link>
       <div className="flex gap-x-3">
         <Link href={"/cart"}>
           <IoCartOutline className={iconStyles} />

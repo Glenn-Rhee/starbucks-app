@@ -1,27 +1,34 @@
 import { cn } from "@/lib/utils";
-import Image from "next/image";
 
 interface SizeCoffeProps {
   className?: string;
-  src: string;
-  size: number;
-  title: string;
+  title: "S" | "M" | "L";
+  valueActive: "S" | "M" | "L";
+  setValueActive: (value: "S" | "M" | "L") => void;
 }
 
 export default function SizeCoffe(props: SizeCoffeProps) {
-  const { className, src, size, title } = props;
+  const { className, title, valueActive, setValueActive } = props;
 
   return (
-    <div
+    <button
       className={cn(
-        "border-darkGrey/20 h-fit w-fit border min-w-[18px] box-border p-2 rounded-[5px] relative",
-        className
+        "border-darkGrey/20 p-5 border min-w-[18px] box-border rounded-[5px] relative",
+        className,
+        valueActive === title.toUpperCase()
+          ? "bg-mainGreen/15 border border-mainGreen/60"
+          : ""
       )}
+      onClick={() => setValueActive(title)}
     >
-      <Image src={src} width={size} height={size} alt={"Small size"} />
-      <span className="text-xs text-darkGrey/95 absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center font-light">
+      <span
+        className={cn(
+          "text-xs text-darkGrey/95 absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center font-light",
+          valueActive === title.toUpperCase() ? "text-darkGreen" : ""
+        )}
+      >
         {title.toUpperCase()}
       </span>
-    </div>
+    </button>
   );
 }
