@@ -7,7 +7,8 @@ import ButtonAuth from "../ButtonAuth";
 import LinkAuth from "../LinkAuth";
 import { ZodError } from "zod";
 import { getErrorMsgs, trimedData, updatedDataError } from "@/utils/authFe";
-import { formLoginSchema } from "@/lib/zod";
+import { Validation } from "@/validation/validation";
+import { UserValidation } from "@/validation/user-validation";
 
 interface DataForm {
   email: string;
@@ -49,7 +50,7 @@ export default function LoginViews() {
 
     try {
       setData((prevData) => trimedData(prevData));
-      formLoginSchema.parse(data);
+      Validation.validate(UserValidation.LOGIN, data);
       if (data.password !== data.confirmPassword) {
         setDataError((prev) => ({
           ...prev,

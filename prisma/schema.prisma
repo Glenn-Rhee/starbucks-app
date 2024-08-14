@@ -1,0 +1,75 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Status {
+  COMPLETED
+  PROSES
+  CANCELED
+}
+
+enum Size {
+  Small
+  Medium
+  Large
+}
+
+model User {
+  id                 String        @id @unique @default(cuid())
+  fullname           String
+  username           String
+  mobilePhone        String
+  email              String
+  password           String
+  linkProfilePicture String?
+  address            String?
+  balance            Int           @default(0)
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+  Transaction        Transaction[]
+  Cart               Cart[]
+}
+
+model Coffe {
+  id          String        @id @default(cuid())
+  name        String
+  description String
+  price       Int
+  linkPicture String
+  Transaction Transaction[]
+  Cart        Cart[]
+}
+
+model Transaction {
+  id        String   @id @default(cuid())
+  idCoffe   String
+  idUser    String
+  title     String
+  status    Status
+  balance   Int
+  date      DateTime
+  User      User     @relation(fields: [idUser], references: [id])
+  Coffe     Coffe    @relation(fields: [idCoffe], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Cart {
+  id       String @id @default(cuid())
+  idUser   String
+  idCoffe  String
+  quantity Int
+  size     Size
+  User     User   @relation(fields: [idUser], references: [id])
+  Coffe    Coffe  @relation(fields: [idCoffe], references: [id])
+}

@@ -7,8 +7,9 @@ import { useEffect, useState } from "react";
 import { getErrorMsgs, trimedData, updatedDataError } from "@/utils/authFe";
 import ButtonAuth from "../ButtonAuth";
 import FooterForm from "../FooterForm";
-import { formSignupSchema } from "@/lib/zod";
 import LinkAuth from "../LinkAuth";
+import { UserValidation } from "@/validation/user-validation";
+import { Validation } from "@/validation/validation";
 
 export interface DataForm {
   fullname: string;
@@ -63,7 +64,7 @@ export default function SignupViews() {
 
     try {
       setData((prevData) => trimedData(prevData));
-      formSignupSchema.parse(data);
+      Validation.validate(UserValidation.REGISTRATION, data);
       if (data.password !== data.confirmPassword) {
         setDataError((prev) => ({
           ...prev,
