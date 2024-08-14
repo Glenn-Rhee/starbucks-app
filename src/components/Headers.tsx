@@ -37,6 +37,8 @@ export default function Headers() {
     return null;
   }
 
+  if (pathName.includes("/auth/")) return null;
+
   return (
     <header className="flex justify-between w-screen px-4 py-3 z-50 items-center bg-white shadow-lg shadow-black/15 rounded-lg sticky top-0">
       <Link href={"/"}>
