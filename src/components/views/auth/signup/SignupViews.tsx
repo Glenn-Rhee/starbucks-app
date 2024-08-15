@@ -10,6 +10,10 @@ import FooterForm from "../FooterForm";
 import LinkAuth from "../LinkAuth";
 import { UserValidation } from "@/validation/user-validation";
 import { Validation } from "@/validation/validation";
+import { toast } from "sonner";
+import { ResponsePayload } from "@/models/user-model";
+import { useUser } from "@/store/useUser";
+import { useRouter } from "next/navigation";
 
 export interface DataForm {
   fullname: string;
@@ -21,6 +25,7 @@ export interface DataForm {
 }
 
 export default function SignupViews() {
+  const router = useRouter();
   const [data, setData] = useState<DataForm>({
     fullname: "",
     username: "",
@@ -37,8 +42,9 @@ export default function SignupViews() {
     password: "",
     confirmPassword: "",
   });
-
+  const { setAccess } = useUser();
   const [disable, setDisable] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     for (let key in data) {
@@ -52,7 +58,7 @@ export default function SignupViews() {
     }
   }, [data]);
 
-  function onSubmit() {
+  async function onSubmit() {
     setDataError({
       fullname: "",
       username: "",
@@ -74,7 +80,27 @@ export default function SignupViews() {
         return;
       }
 
-      alert("Signup berhasil");
+      const { confirmPassword, ...newData } = data;
+
+      const response = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newData),
+      });
+
+      if (!response.ok) throw new Error(response.statusText);
+
+      const dataResponse = (await response.json()) as ResponsePayload;
+      if (dataResponse.status === "failed") {
+        throw new Error(dataResponse.message);
+      }
+
+      const token = dataResponse.data;
+      setAccess(token);
+      toast("Sign up successfully");
+      router.push("/");
     } catch (error) {
       if (error instanceof ZodError) {
         const errorMessages = getErrorMsgs(error);
@@ -82,6 +108,14 @@ export default function SignupViews() {
         setDataError((prevDataError) =>
           updatedDataError(prevDataError, errorMessages)
         );
+      } else if (error instanceof Error) {
+        toast("Oops something went wrong", { description: error.message });
+      } else {
+        console.log(error);
+
+        toast("Oops something went wrong", {
+          description: "Internal server error",
+        });
       }
     }
   }
@@ -137,7 +171,7 @@ export default function SignupViews() {
 
       <FooterForm>
         <LinkAuth href={"/auth/login"}>Already have an account?</LinkAuth>
-        <ButtonAuth onSubmit={onSubmit} disable={disable}>
+        <ButtonAuth onSubmit={onSubmit} disable={disable} isLoading={isLoading}>
           Sign up
         </ButtonAuth>
       </FooterForm>

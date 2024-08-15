@@ -4,9 +4,11 @@ import {
   ResponsePayload,
   SignupRequest,
 } from "@/models/user-model";
+import { setCookie } from "@/utils/cookies";
 import { prismaClient } from "@/utils/database";
 import { JWT } from "@/utils/jwt";
 import bcrypt from "bcryptjs";
+import { cookies } from "next/headers";
 
 export class UserService {
   static async Signup(data: SignupRequest): Promise<ResponsePayload> {
@@ -16,19 +18,20 @@ export class UserService {
       },
     });
 
-    if (totalEmailUSer > 0) {
+    if (totalEmailUSer > 0)
       throw new ResponseError(403, "Email already registered");
-    }
 
     const hashPassword = await bcrypt.hash(data.password, 10);
     const newUser = await prismaClient.user.create({
       data: {
         ...data,
+
         password: hashPassword,
       },
     });
 
     const token = JWT.signJwt({ id: newUser.id, email: newUser.email });
+    setCookie("token", token);
 
     console.log("Berhasil menambahkan user baru: ", newUser);
     return {
@@ -46,18 +49,15 @@ export class UserService {
       },
     });
 
-    if (!user) {
-      throw new ResponseError(404, "Email is not registered");
-    }
+    if (!user) throw new ResponseError(404, "Email is not registered");
 
     const isSame = await bcrypt.compare(data.password, user.password);
 
-    if (!isSame) {
-      throw new ResponseError(403, "Password is wrong!");
-    }
+    if (!isSame) throw new ResponseError(403, "Password is wrong!");
 
     const token = JWT.signJwt({ id: user.id, email: user.email });
-
+    // cookies().set("token", token);
+    setCookie("token", token);
     return {
       message: "Success Login",
       status: "success",

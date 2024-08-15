@@ -19,6 +19,8 @@ export default function responseError(error: any): ResponsePayload {
       statusCode: error.status,
     };
   } else {
+    console.log(error);
+
     return {
       status: "failed",
       message: "Internal server error",

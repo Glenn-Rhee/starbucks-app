@@ -3,6 +3,7 @@ import { LoginRequest, ResponsePayload } from "@/models/user-model";
 import { UserService } from "@/services/user-service";
 import { UserValidation } from "@/validation/user-validation";
 import { Validation } from "@/validation/validation";
+import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
@@ -16,4 +17,9 @@ export async function POST(req: NextRequest) {
     response = responseError(error);
   }
   return NextResponse.json(response);
+}
+
+export function GET(req: NextRequest) {
+  cookies().delete("token");
+  return NextResponse.json("cookie has been delete");
 }

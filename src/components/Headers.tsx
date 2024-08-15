@@ -59,8 +59,10 @@ export default function Headers() {
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropDownItem>
-                <IoIosLogOut className="text-darkGreen font-bold text-lg" />
-                <span className="text-darkGreen ">Logout</span>
+                <Link href={"/api/auth/login"} className="flex items-center gap-x-3">
+                  <IoIosLogOut className="text-darkGreen font-bold text-lg" />
+                  <span className="text-darkGreen ">Logout</span>
+                </Link>
               </DropDownItem>
               <DropDownItem>
                 <MdOutlineLightMode className="text-darkGreen font-bold text-lg" />

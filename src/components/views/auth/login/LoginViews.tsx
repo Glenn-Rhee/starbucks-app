@@ -9,6 +9,10 @@ import { ZodError } from "zod";
 import { getErrorMsgs, trimedData, updatedDataError } from "@/utils/authFe";
 import { Validation } from "@/validation/validation";
 import { UserValidation } from "@/validation/user-validation";
+import { toast } from "sonner";
+import { useUser } from "@/store/useUser";
+import { ResponsePayload } from "@/models/user-model";
+import { useRouter } from "next/navigation";
 
 interface DataForm {
   email: string;
@@ -28,6 +32,9 @@ export default function LoginViews() {
     confirmPassword: "",
   });
   const [disable, setDisable] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { setAccess } = useUser();
+  const router = useRouter();
 
   useEffect(() => {
     for (let key in data) {
@@ -42,6 +49,7 @@ export default function LoginViews() {
   }, [data]);
 
   async function onSubmit() {
+    setIsLoading(true);
     setDataError({
       email: "",
       password: "",
@@ -60,7 +68,31 @@ export default function LoginViews() {
         return;
       }
 
-      alert("Login Success");
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+
+      const dataResponse = (await response.json()) as ResponsePayload;
+
+      if (dataResponse.status === "failed") {
+        throw new Error(dataResponse.message);
+      }
+      
+      const token = dataResponse.data;
+      setAccess(token);
+      toast("Login " + dataResponse.status, {
+        description: dataResponse.message,
+      });
+
+      router.push("/");
     } catch (error) {
       if (error instanceof ZodError) {
         const errorMessages = getErrorMsgs(error);
@@ -68,7 +100,15 @@ export default function LoginViews() {
         setDataError((perevDataError) =>
           updatedDataError(perevDataError, errorMessages)
         );
+      } else if (error instanceof Error) {
+        toast("Oops something went wrong", { description: error.message });
+      } else {
+        toast("Oops something went wrong", {
+          description: "Internal server error",
+        });
       }
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -103,7 +143,7 @@ export default function LoginViews() {
 
       <FooterForm>
         <LinkAuth href={"/auth/signup"}>Don&apos;t have an account?</LinkAuth>
-        <ButtonAuth onSubmit={onSubmit} disable={disable}>
+        <ButtonAuth onSubmit={onSubmit} disable={disable} isLoading={isLoading}>
           Login
         </ButtonAuth>
       </FooterForm>

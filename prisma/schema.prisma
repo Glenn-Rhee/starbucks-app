@@ -35,6 +35,8 @@ model User {
   linkProfilePicture String?
   address            String?
   balance            Int           @default(0)
+  income             Int           @default(0)
+  outcome            Int           @default(0)
   createdAt          DateTime      @default(now())
   updatedAt          DateTime      @updatedAt
   Transaction        Transaction[]
