@@ -41,6 +41,24 @@ model User {
   updatedAt          DateTime      @updatedAt
   Transaction        Transaction[]
   Cart               Cart[]
+  favorite           Favorite[]
+  Purchased          Purchased[]
+}
+
+model Favorite {
+  id      String @id @default(cuid())
+  idUser  String
+  idCoffe String
+  User    User   @relation(fields: [idUser], references: [id])
+  Coffe   Coffe  @relation(fields: [idCoffe], references: [id])
+}
+
+model Purchased {
+  id      String @id @default(cuid())
+  idUser  String
+  idCoffe String
+  User    User   @relation(fields: [idUser], references: [id])
+  Coffe   Coffe  @relation(fields: [idCoffe], references: [id])
 }
 
 model Coffe {
@@ -51,6 +69,8 @@ model Coffe {
   linkPicture String
   Transaction Transaction[]
   Cart        Cart[]
+  favorite    Favorite[]
+  Purchased   Purchased[]
 }
 
 model Transaction {

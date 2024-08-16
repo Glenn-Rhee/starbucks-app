@@ -1,4 +1,3 @@
-import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -24,7 +23,9 @@ export default function CardRecomendation() {
             Rp 20.000
           </span>
         </div>
-        <span className="min-w-full bg-mainGreen mt-4 flex items-center justify-center py-1 px-2 text-white rounded-[8px]">Add</span>
+        <span className="min-w-full bg-mainGreen mt-4 flex items-center justify-center py-1 px-2 text-white rounded-[8px]">
+          Add
+        </span>
       </Link>
     </div>
   );

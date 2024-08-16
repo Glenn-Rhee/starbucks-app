@@ -1,5 +1,4 @@
 "use client";
-import { FaRegBell } from "react-icons/fa";
 import { HiDotsVertical } from "react-icons/hi";
 import {
   DropdownMenu,
@@ -11,12 +10,13 @@ import {
 import { IoIosLogOut } from "react-icons/io";
 import { MdOutlineLightMode } from "react-icons/md";
 import DropDownItem from "./DropDownItem";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { IoCartOutline } from "react-icons/io5";
 import Link from "next/link";
 
 export default function Headers() {
   const pathName = usePathname();
+  const router = useRouter();
   let title;
   switch (pathName) {
     case "/transaction":
@@ -39,6 +39,14 @@ export default function Headers() {
 
   if (pathName.includes("/auth/")) return null;
 
+  async function handleLogout() {
+    await fetch("/api/user", {
+      method: "DELETE",
+    });
+
+    router.push("/auth/login");
+  }
+
   return (
     <header className="flex justify-between w-screen px-4 py-3 z-50 items-center bg-white shadow-lg shadow-black/15 rounded-lg sticky top-0">
       <Link href={"/"}>
@@ -59,10 +67,13 @@ export default function Headers() {
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropDownItem>
-                <Link href={"/api/auth/login"} className="flex items-center gap-x-3">
+                <button
+                  className="flex items-center gap-x-3"
+                  onClick={handleLogout}
+                >
                   <IoIosLogOut className="text-darkGreen font-bold text-lg" />
                   <span className="text-darkGreen ">Logout</span>
-                </Link>
+                </button>
               </DropDownItem>
               <DropDownItem>
                 <MdOutlineLightMode className="text-darkGreen font-bold text-lg" />

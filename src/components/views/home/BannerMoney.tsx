@@ -1,9 +1,16 @@
 // @refresh reset
+import { User } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa6";
 
-export default function BannerMoney() {
+interface BannerMoneyProps {
+  data: User;
+}
+
+export default function BannerMoney(props: BannerMoneyProps) {
+  const { data } = props;
+
   return (
     <div className="mt-5 relative mx-auto z-10 overflow-hidden bg-mainGreen rounded-3xl">
       <Image
@@ -16,11 +23,11 @@ export default function BannerMoney() {
       <div className="text-white flex justify-between items-end absolute bottom-7 px-5 w-full">
         <div className="flex flex-col justify-center gap-y-3">
           <div className="w-full">
-            <h4 className="font-semibold text-base">Raisya Ariana Asfriansah</h4>
+            <h4 className="font-semibold text-base">{data.fullname}</h4>
           </div>
           <div>
             <h4>Balance</h4>
-            <span className="text-lg font-semibold">Rp. 55.000</span>
+            <span className="text-lg font-semibold">Rp. {data.balance}</span>
           </div>
         </div>
         <div>

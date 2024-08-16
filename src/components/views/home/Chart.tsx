@@ -11,11 +11,22 @@ import {
 } from "@/components/ui/chart";
 import { TbCup } from "react-icons/tb";
 import { FaRegStar } from "react-icons/fa";
+import { User } from "@prisma/client";
 
-export default function Chart() {
+interface DataUser extends User {
+  purchased: number;
+  favorited: number;
+}
+
+interface ChartProps {
+  data: DataUser;
+}
+export default function Chart(props: ChartProps) {
+  const { data } = props;
+
   const chartData = [
-    { browser: "Purchased", visitors: 2, fill: "#1D4D4F" },
-    { browser: "Started", visitors: 2, fill: "gray" },
+    { browser: "Purchased", visitors: data.purchased , fill: "#1D4D4F" },
+    { browser: "Favorited", visitors: data.favorited, fill: "gray" },
   ];
 
   const chartConfig = {
