@@ -19,7 +19,13 @@ export default function CoffeItem(props: CoffeItemProps) {
     >
       <div className="flex gap-x-4 min-w-full">
         <div className="flex-grow">
-          <Image src={"/coffe.png"} width={60} height={60} alt={"Coffe"} />
+          <Image
+            src={"/coffe.png"}
+            width={60}
+            height={60}
+            alt={"Coffe"}
+            className="aspect-square"
+          />
         </div>
         <div className=" w-[70%] flex-grow-[2]">
           <h4 className="text-dark text-lg font-semibold">{title}</h4>
@@ -27,13 +33,6 @@ export default function CoffeItem(props: CoffeItemProps) {
             <p className="">{description}</p>
             <span className="">Rp {price.toLocaleString()}</span>
           </div>
-          {/* <div
-            className={cn("w-full flex gap-x-2 mt-2 items-center justify-end")}
-          > */}
-          {/* <Link href={"/order/4"} className="rounded-[10px] min-w-[6rem]">
-            Buy
-          </Link> */}
-          {/* </div> */}
           <div className="w-full flex gap-x-2 mt-2 items-center justify-end">
             <span className="rounded-[10px] bg-mainGreen text-white flex items-center justify-center py-1 w-1/2">
               Buy

@@ -25,6 +25,18 @@ enum Size {
   Large
 }
 
+enum TypeCoffe {
+  Expresso
+  Americano
+  LongBlack
+  Cappucino
+  CoffeLatte
+  MoccaLatte
+  Afogato
+  ColdBrew
+  Macchiato
+}
+
 model User {
   id                 String        @id @unique @default(cuid())
   fullname           String
@@ -67,6 +79,7 @@ model Coffe {
   description String
   price       Int
   linkPicture String
+  type        TypeCoffe
   Transaction Transaction[]
   Cart        Cart[]
   favorite    Favorite[]
