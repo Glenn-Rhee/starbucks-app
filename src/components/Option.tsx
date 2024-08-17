@@ -2,14 +2,17 @@
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { Button } from "./ui/button";
+import { useTypeCoffe } from "@/store/useTypeCoffe";
+import { Coffe } from "@prisma/client";
 
 interface OptionProps {
-  data: string[];
-  initiateValue: string;
+  data: Coffe["type"][];
+  initiateValue: Coffe["type"];
 }
 export default function Option(props: OptionProps) {
   const { data, initiateValue } = props;
   const [valueActive, setValueActive] = useState<string>(initiateValue);
+  const { setType } = useTypeCoffe();
 
   return (
     <div className="flex gap-x-2 overflow-auto px-2 pt-2">
@@ -26,7 +29,10 @@ export default function Option(props: OptionProps) {
               "text-sm bg-transparent border-none w-full shadow-none",
               item === valueActive ? "text-white" : "text-maingrebg-mainGreen"
             )}
-            onClick={() => setValueActive(item)}
+            onClick={() => {
+              setValueActive(item);
+              setType(item);
+            }}
           >
             {item}
           </Button>

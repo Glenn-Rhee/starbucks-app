@@ -31,3 +31,18 @@ export async function DELETE(req: NextRequest) {
     return NextResponse.redirect(new URL("/auth/login", req.url));
   }
 }
+
+export async function PATCH(req: NextRequest) {
+  let response: ResponsePayload;
+  try {
+    const token = getCookie("token");
+    if (!token) throw new ResponseError(403, "Unathorized token is required!");
+
+    const url = new URL(req.url);
+    response = await UserService.editUser(token.value, url);
+  } catch (error) {
+    response = responseError(error);
+  }
+
+  return NextResponse.json(response);
+}

@@ -1,15 +1,16 @@
 import Option from "@/components/Option";
+import { Coffe } from "@prisma/client";
 
 export default function TypeCoffe() {
-  const typesCoffe = [
+  const typesCoffe: Coffe["type"][] = [
     "Expresso",
     "Americano",
-    "Long Black",
+    "LongBlack",
     "Cappucino",
-    "Caffe Latte",
-    "Mocca Latte",
+    "CoffeLatte",
+    "MoccaLatte",
     "Afogato",
-    "Cold Brew",
+    "ColdBrew",
     "Macchiato",
   ];
 

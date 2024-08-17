@@ -94,4 +94,31 @@ export class UserService {
       },
     };
   }
+
+  static async editUser(token: string, url: URL): Promise<ResponsePayload> {
+    const decoded = JWT.decoded(token) as JWTDecoded;
+    if (!decoded) throw new ResponseError(403, "Forbidden!! Unknown user");
+    const address = url.searchParams.get("address");
+    const dataUser = await prismaClient.user.findUnique({
+      where: {
+        id: decoded.id,
+      },
+    });
+
+    if (!dataUser) throw new ResponseError(404, "User is not found!");
+    await prismaClient.user.update({
+      where: {
+        id: dataUser.id,
+      },
+      data: {
+        address,
+      },
+    });
+
+    return {
+      status: "success",
+      statusCode: 201,
+      message: "Successfully edited one user!",
+    };
+  }
 }

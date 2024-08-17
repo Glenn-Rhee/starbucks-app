@@ -85,7 +85,7 @@ export default function LoginViews() {
       if (dataResponse.status === "failed") {
         throw new Error(dataResponse.message);
       }
-      
+
       const token = dataResponse.data;
       setAccess(token);
       toast("Login " + dataResponse.status, {
@@ -105,6 +105,7 @@ export default function LoginViews() {
       } else {
         toast("Oops something went wrong", {
           description: "Internal server error",
+          duration: 2000,
         });
       }
     } finally {
