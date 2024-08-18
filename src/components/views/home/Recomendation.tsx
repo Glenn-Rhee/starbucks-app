@@ -43,7 +43,7 @@ export default function Recomendation() {
 
       getData();
     }
-  }, [access, router]);
+  }, [access, router, setAccess]);
 
   return (
     <Card className="mt-5 mb-16 px-4 py-4">

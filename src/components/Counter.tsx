@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { useQuantity } from "@/store/useQuantity";
 import { useState } from "react";
 
 interface CounterProps {
@@ -8,7 +9,7 @@ interface CounterProps {
 }
 export default function Counter(props: CounterProps) {
   const { className } = props;
-  const [qty, setQty] = useState<number>(1);
+  const { qty, setQty } = useQuantity();
 
   return (
     <div

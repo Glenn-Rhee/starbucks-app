@@ -18,6 +18,7 @@ export function middleware(req: NextRequest) {
 export const config = {
   matcher: [
     "/api/coffe",
+    "/api/cart",
     "/auth/login",
     "/auth/signup",
     "/",

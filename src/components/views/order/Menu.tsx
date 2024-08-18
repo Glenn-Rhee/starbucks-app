@@ -45,7 +45,7 @@ export default function Menu() {
     };
 
     getData();
-  }, [access, isLoading, router, type]);
+  }, [access, isLoading, router, type, setCoffeData]);
 
   return isLoading ? (
     <div className="mt-3 mb-20">

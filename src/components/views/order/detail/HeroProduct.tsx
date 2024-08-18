@@ -12,9 +12,10 @@ export default function HeroProduct(props: HeroProductProps) {
     <div className="flex flex-col mt-8 mb-14">
       <Image
         src={"/" + data.linkPicture.split("./")[1]}
-        className="mx-auto mb-6 rounded-[10px]"
+        className="mx-auto w-auto mb-6 rounded-[10px]"
         width={160}
         height={160}
+        priority
         alt="Coffe"
       />
       <div className="flex flex-col gap-y-1 mt-3 tracking-wide">

@@ -5,7 +5,7 @@ import InputAuth from "../InputAuth";
 import { ZodError } from "zod";
 import { useEffect, useState } from "react";
 import { getErrorMsgs, trimedData, updatedDataError } from "@/utils/authFe";
-import ButtonAuth from "../ButtonAuth";
+import ButtonAuth from "../../../ButtonAuth";
 import FooterForm from "../FooterForm";
 import LinkAuth from "../LinkAuth";
 import { UserValidation } from "@/validation/user-validation";

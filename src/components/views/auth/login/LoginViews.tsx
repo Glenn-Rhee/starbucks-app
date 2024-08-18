@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import InputAuth from "../InputAuth";
 import TitleAuth from "../TitleAuth";
 import FooterForm from "../FooterForm";
-import ButtonAuth from "../ButtonAuth";
+import ButtonAuth from "../../../ButtonAuth";
 import LinkAuth from "../LinkAuth";
 import { ZodError } from "zod";
 import { getErrorMsgs, trimedData, updatedDataError } from "@/utils/authFe";

@@ -93,18 +93,19 @@ model Transaction {
   title     String
   status    Status
   balance   Int
-  date      DateTime
   User      User     @relation(fields: [idUser], references: [id])
   Coffe     Coffe    @relation(fields: [idCoffe], references: [id])
   createdAt DateTime @default(now())
 }
 
 model Cart {
-  id       String @id @default(cuid())
-  idUser   String
-  idCoffe  String
-  quantity Int
-  size     Size
-  User     User   @relation(fields: [idUser], references: [id])
-  Coffe    Coffe  @relation(fields: [idCoffe], references: [id])
+  id        String   @id @default(cuid())
+  idUser    String
+  idCoffe   String
+  quantity  Int
+  size      Size
+  User      User     @relation(fields: [idUser], references: [id])
+  Coffe     Coffe    @relation(fields: [idCoffe], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
