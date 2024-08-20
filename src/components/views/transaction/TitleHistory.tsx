@@ -7,7 +7,7 @@ interface TitleHistoryProps {
 
 export default function TitleHistory(props: TitleHistoryProps) {
   const { month, balance } = props;
-  const balancePrice = balance.toLocaleString();
+  const balancePrice = balance.toLocaleString("id-ID");
 
   return (
     <div className="flex justify-between items-center">

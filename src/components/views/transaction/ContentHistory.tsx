@@ -4,6 +4,7 @@ import { useUser } from "@/store/useUser";
 import { Coffe } from "@prisma/client";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { FaPlusCircle } from "react-icons/fa";
 import { ImSpinner2 } from "react-icons/im";
 import { toast } from "sonner";
 
@@ -34,6 +35,10 @@ export default function ContentHistory(props: ContentHistoryProps) {
 
   useEffect(() => {
     if (access) {
+      if (title === "Top up") {
+        setImage("Top up");
+        return;
+      }
       const getData = async () => {
         const response = await fetch("/api/coffe?id=" + idCoffe, {
           method: "GET",
@@ -57,15 +62,17 @@ export default function ContentHistory(props: ContentHistoryProps) {
 
       getData();
     }
-  }, [access, idCoffe]);
+  }, [access, idCoffe, title]);
 
   return (
     <div className="flex justify-between px-1 items-center mb-2 border-b border-lightGrey/50 pb-3 last:pb-0 last:border-none">
       <div className="flex justify-between">
         <div className="flex gap-x-2 items-center">
-          <div className="p-2 bg-lightGrey/10 border-lightGrey/60 border rounded-[5px]">
+          <div className="flex items-center justify-center aspect-square bg-lightGrey/10 border-lightGrey/60 min-h-10 min-w-14 border rounded-[5px]">
             {image === "" ? (
               <ImSpinner2 className="animate-spin text-mainGreen text-3xl" />
+            ) : image === "Top up" ? (
+              <FaPlusCircle size={34} className="text-mainGreen" />
             ) : (
               <Image
                 src={"/" + image.split("./")[1]}

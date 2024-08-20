@@ -86,10 +86,10 @@ export default function Headers() {
                   <span className="text-darkGreen ">Logout</span>
                 </button>
               </DropDownItem>
-              <DropDownItem>
+              {/* <DropDownItem>
                 <MdOutlineLightMode className="text-darkGreen font-bold text-lg" />
                 <span className="text-darkGreen ">Light</span>
-              </DropDownItem>
+              </DropDownItem> */}
             </DropdownMenuContent>
           </DropdownMenu>
         </div>

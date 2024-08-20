@@ -27,7 +27,8 @@ export async function GET(req: NextRequest) {
   try {
     const token = req.headers.get("bearir");
     if (!token) throw new ResponseError(403, "Forbidden!! Token is required");
-    response = await TransactionService.getTransaction(token);
+    const url = new URL(req.url);
+    response = await TransactionService.getTransaction(token, url);
   } catch (error) {
     response = responseError(error);
   }

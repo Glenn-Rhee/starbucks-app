@@ -8,44 +8,70 @@ import { ResponsePayload } from "@/models/user-model";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { useDataCoffe } from "@/store/useDataCoffe";
+import { useTransaction } from "@/store/useTransaction";
 
 interface SearchContentProps {
   className?: string;
   placeholder: string;
   children?: React.ReactNode;
+  useFor: "transaction" | "coffe";
 }
 
 export default function SearchContent(props: SearchContentProps) {
-  const { className, placeholder, children } = props;
+  const { className, placeholder, children, useFor } = props;
   const { value, setValue } = useSearchCoffe();
   const { setCoffeData } = useDataCoffe();
+  const { setTransaction, setMessage } = useTransaction();
   const { access, setAccess } = useUser();
   const router = useRouter();
 
   async function handleSearch() {
-    const response = await fetch(
-      "http://localhost:3000" + "/api/coffe?name=" + value,
-      {
+    if (useFor === "coffe") {
+      const response = await fetch(
+        "http://localhost:3000" + "/api/coffe?name=" + value,
+        {
+          method: "GET",
+          headers: {
+            bearir: access || "",
+          },
+        }
+      );
+
+      const data = (await response.json()) as ResponsePayload;
+      if (data.status === "failed") {
+        if (data.message.includes("Token")) {
+          setAccess("");
+          router.push("/auth/login");
+          return;
+        } else {
+          toast(data.status + " " + data.message);
+          return;
+        }
+      }
+
+      setCoffeData(data.data);
+    } else {
+      const response = await fetch("/api/transaction?title=" + value, {
         method: "GET",
         headers: {
           bearir: access || "",
         },
-      }
-    );
+      });
 
-    const data = (await response.json()) as ResponsePayload;
-    if (data.status === "failed") {
-      if (data.message.includes("Token")) {
-        setAccess("");
-        router.push("/auth/login");
-        return;
-      } else {
-        toast(data.status + " " + data.message);
-        return;
+      const dataResponse = (await response.json()) as ResponsePayload;
+      if (dataResponse.status === "failed") {
+        return toast("Failed get transaction", {
+          description: dataResponse.message,
+          duration: 2500,
+        });
       }
+
+      if (dataResponse.data.length === 0) {
+        setMessage("No transaction found");
+      }
+
+      setTransaction(dataResponse.data);
     }
-
-    setCoffeData(data.data);
   }
 
   return (

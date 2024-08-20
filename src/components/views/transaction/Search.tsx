@@ -1,7 +1,5 @@
 "use client";
 import { CiFilter } from "react-icons/ci";
-import { Input } from "@/components/ui/input";
-import { CiSearch } from "react-icons/ci";
 import {
   Dialog,
   DialogContent,
@@ -33,7 +31,7 @@ export default function Search() {
 
   return (
     <div className="w-full flex items-center gap-x-2 mt-4">
-      <SearchContent placeholder="Search transaction" />
+      <SearchContent placeholder="Search transaction" useFor="transaction" />
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <button

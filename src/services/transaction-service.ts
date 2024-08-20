@@ -100,15 +100,30 @@ export class TransactionService {
     };
   }
 
-  static async getTransaction(token: string): Promise<ResponsePayload> {
+  static async getTransaction(
+    token: string,
+    url: URL
+  ): Promise<ResponsePayload> {
     const decoded: JWTDecoded | null = JWT.decoded(token) as JWTDecoded;
     if (!decoded) throw new ResponseError(403, "Invalid Token!");
+    let data: Transaction[] | [];
+    const title = url.searchParams.get("title");
 
-    const data = await prismaClient.transaction.findMany({
-      where: {
-        idUser: decoded.id,
-      },
-    });
+    if (title) {
+      data = await prismaClient.transaction.findMany({
+        where: {
+          title: {
+            contains: title,
+          },
+        },
+      });
+    } else {
+      data = await prismaClient.transaction.findMany({
+        where: {
+          idUser: decoded.id,
+        },
+      });
+    }
 
     return {
       status: "success",

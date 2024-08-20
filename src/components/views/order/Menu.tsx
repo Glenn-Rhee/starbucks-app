@@ -51,6 +51,7 @@ export default function Menu() {
     <div className="mt-3 mb-20">
       <h3 className="text-lg font-semibold text-dark">Menu</h3>
       <SearchContent
+        useFor="coffe"
         className="w-full shadow-sm shadow-dark/25 mb-2"
         placeholder="Find your coffe"
       />
@@ -71,6 +72,7 @@ export default function Menu() {
       <div className="mt-3">
         <h3 className="text-lg font-semibold text-dark">Menu</h3>
         <SearchContent
+          useFor="coffe"
           className="w-full shadow-sm shadow-dark/25 mb-2"
           placeholder="Find your coffe"
         />
