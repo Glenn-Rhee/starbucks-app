@@ -16,9 +16,20 @@ import RadioItem from "./RadioItem";
 import ButtonBuy from "@/components/ButtonBuy";
 import SearchContent from "@/components/SearchContent";
 
+export type OptionTransaction =
+  | "All"
+  | "Completed"
+  | "In Progress"
+  | "Cancelled";
+
 export default function Search() {
   const [open, setOpen] = useState<boolean>(false);
-  const optionTransaction = ["All", "Completed", "In Progress", "Cancelled"];
+  const optionTransaction: OptionTransaction[] = [
+    "All",
+    "Completed",
+    "In Progress",
+    "Cancelled",
+  ];
 
   return (
     <div className="w-full flex items-center gap-x-2 mt-4">
@@ -32,7 +43,7 @@ export default function Search() {
             <CiFilter className="font-bold text-xl" />
           </button>
         </DialogTrigger>
-        <DialogContent className="bg-white">
+        <DialogContent className="bg-white" aria-describedby="Filter content">
           <DialogTitle className="text-darkGreen text-2xl font-semibold text-center">
             Filter History
           </DialogTitle>
@@ -40,6 +51,7 @@ export default function Search() {
             <Option
               data={optionTransaction}
               initiateValue={optionTransaction[0]}
+              isTransaction
             />
           </FilterItem>
           <FilterItem title="Date">

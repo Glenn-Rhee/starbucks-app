@@ -1,12 +1,14 @@
 // @refresh reset
+"use client";
 import { FaArrowDownLong, FaArrowUpLong } from "react-icons/fa6";
 import Transaction from "./Transaction";
 import Image from "next/image";
-import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import ItemProfile from "./ItemProfile";
 import Title from "./Title";
 import { User } from "@prisma/client";
 import { maskedString } from "@/utils/maskingString";
+import { useUser } from "@/store/useUser";
+import { useRouter } from "next/navigation";
 
 interface ProfileViewProps {
   data: User;
@@ -14,8 +16,20 @@ interface ProfileViewProps {
 
 export default function ProfileView(props: ProfileViewProps) {
   const { data } = props;
+  const { setAccess } = useUser();
+  const router = useRouter();
   const phoneNumber = maskedString(data.mobilePhone);
   const email = maskedString(data.email);
+
+  async function handleLogout() {
+    await fetch("/api/user", {
+      method: "DELETE",
+    });
+
+    setAccess("");
+
+    router.push("/auth/login");
+  }
 
   return (
     <>
@@ -63,7 +77,10 @@ export default function ProfileView(props: ProfileViewProps) {
           <Title>{email}</Title>
         </ItemProfile>
       </div>
-      <button className="min-w-full mt-4 p-3 mb-20 bg-mainGreen/5 text-mainGreen border border-mainGreen flex items-center justify-center rounded-[8px] font-semibold">
+      <button
+        className="min-w-full mt-4 p-3 mb-20 bg-mainGreen/5 text-mainGreen border border-mainGreen flex items-center justify-center rounded-[8px] font-semibold"
+        onClick={handleLogout}
+      >
         Logout
       </button>
     </>

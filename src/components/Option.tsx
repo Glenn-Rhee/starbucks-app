@@ -4,13 +4,15 @@ import { useState } from "react";
 import { Button } from "./ui/button";
 import { useTypeCoffe } from "@/store/useTypeCoffe";
 import { Coffe } from "@prisma/client";
+import { OptionTransaction } from "./views/transaction/Search";
 
 interface OptionProps {
-  data: Coffe["type"][];
-  initiateValue: Coffe["type"];
+  data: Coffe["type"][] | string[];
+  initiateValue: Coffe["type"] | OptionTransaction;
+  isTransaction?: boolean;
 }
 export default function Option(props: OptionProps) {
-  const { data, initiateValue } = props;
+  const { data, initiateValue, isTransaction } = props;
   const [valueActive, setValueActive] = useState<string>(initiateValue);
   const { setType } = useTypeCoffe();
 
@@ -31,7 +33,7 @@ export default function Option(props: OptionProps) {
             )}
             onClick={() => {
               setValueActive(item);
-              setType(item);
+              isTransaction ? null : setType(item as Coffe["type"]);
             }}
           >
             {item}

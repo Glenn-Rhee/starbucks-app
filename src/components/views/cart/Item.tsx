@@ -1,8 +1,11 @@
 "use client";
 import { ResponsePayload } from "@/models/user-model";
+import { useDataCart } from "@/store/useDataCart";
 import { useUser } from "@/store/useUser";
 import { Cart, Coffe } from "@prisma/client";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 interface ItemProps {
   data: Cart;
@@ -11,6 +14,8 @@ interface ItemProps {
 export default function Item(props: ItemProps) {
   const { data } = props;
   const { access } = useUser();
+  const router = useRouter();
+  const { data: dataCart, setData, dataToBe, setDataToBe } = useDataCart();
   const [dataCoffe, setDataCoffe] = useState<Coffe | null | string>(null);
   useEffect(() => {
     const getOneCoffe = async () => {
@@ -33,10 +38,15 @@ export default function Item(props: ItemProps) {
     };
     getOneCoffe();
   }, [access, data.idCoffe]);
+  const totalPrice =
+    dataCoffe && dataCoffe !== ""
+      ? data.quantity * (dataCoffe as Coffe).price
+      : 0;
 
   if (!dataCoffe) {
     return <p className="text-center text-red-600 text-lg font-semibold"></p>;
   }
+
   if (typeof dataCoffe === "string") {
     return (
       <p className="text-center text-red-600 text-lg font-semibold">
@@ -45,7 +55,36 @@ export default function Item(props: ItemProps) {
     );
   }
 
-  const totalPrice = data.quantity * (dataCoffe as Coffe).price;
+  async function handleDelete() {
+    const response = await fetch("/api/cart?id=" + data.id, {
+      method: "DELETE",
+      headers: {
+        bearir: access || "",
+      },
+    });
+
+    const dataResponse = (await response.json()) as ResponsePayload;
+    if (dataResponse.status === "failed") {
+      toast("Failed delete cart", {
+        description: dataResponse.message,
+        duration: 1500,
+      });
+
+      return;
+    }
+
+    const newDataCart = dataCart?.filter((cart) => cart.id !== data.id);
+    if (!newDataCart) return;
+    setData(newDataCart);
+    toast("Success", {
+      description: dataResponse.message,
+      duration: 1500,
+    });
+
+    router.refresh();
+  }
+
+  console.log(dataToBe);
 
   return (
     <div className="flex justify-between mt-5">
@@ -61,10 +100,16 @@ export default function Item(props: ItemProps) {
             <p className="text-darkGrey font-light text-xs">{data.size}</p>
           </div>
           <div className="flex items-center gap-x-2 mt-2">
-            <button className="text-xs font-bold text-mainGreen h-fit w-fit">
+            {/* <button
+              className="text-xs font-bold text-mainGreen h-fit w-fit"
+              onClick={() => router.push("/order/" + data.idCoffe)}
+            >
               Edit
-            </button>
-            <button className="text-xs font-bold text-red-600 h-fit w-fit">
+            </button> */}
+            <button
+              className="text-xs font-bold text-red-600 h-fit w-fit"
+              onClick={handleDelete}
+            >
               Delete
             </button>
           </div>

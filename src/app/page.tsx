@@ -17,6 +17,7 @@ export default async function HomePage() {
   });
 
   const data = (await response.json()) as ResponsePayload;
+  
   return (
     <Container>
       <BannerMoney data={data.data} />

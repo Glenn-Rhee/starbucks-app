@@ -70,12 +70,20 @@ export class UserService {
     const user = await prismaClient.user.findUnique({ where: { id: data.id } });
     if (!user) throw new ResponseError(404, "Opps! User not found!");
     const { password, ...dataUser } = user;
-
-    const purchased = await prismaClient.purchased.count({
+    let totalPurchased: number;
+    const purchased = await prismaClient.purchased.findMany({
       where: {
         idUser: dataUser.id,
       },
     });
+
+    if (purchased.length === 0) {
+      totalPurchased = 0;
+    } else {
+      totalPurchased = purchased.reduce((sum, item) => sum + item.balance, 0);
+    }
+
+    console.log(totalPurchased);
 
     const favorited = await prismaClient.favorite.count({
       where: {
@@ -89,7 +97,7 @@ export class UserService {
       statusCode: 201,
       data: {
         ...dataUser,
-        purchased,
+        totalPurchased,
         favorited,
       },
     };

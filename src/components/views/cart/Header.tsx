@@ -31,9 +31,6 @@ export default async function HeaderCart() {
         <span className="font-bold text-darkGreen text-lg">
           Drink - {dataUser.address}
         </span>
-        {/* <span className="font-light text-darkGrey text-xs">
-          Delivery fee calculated at 09:20
-        </span> */}
       </div>
     </div>
   );

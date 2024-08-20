@@ -1,3 +1,5 @@
+import { cn } from "@/lib/utils";
+
 interface TitleHistoryProps {
   month: string;
   balance: number;
@@ -10,10 +12,13 @@ export default function TitleHistory(props: TitleHistoryProps) {
   return (
     <div className="flex justify-between items-center">
       <h4 className="text-dark text-base font-semibold">{month}</h4>
-      <span className="text-base font-medium text-mainGreen">
-        {balancePrice.includes("-")
-          ? `-Rp ${balancePrice.split("-")[1]}`
-          : `Rp ${balancePrice}`}
+      <span
+        className={cn("text-base font-medium", {
+          "text-mainGreen": balance > 0,
+          "text-red-600": balance < 0,
+        })}
+      >
+        Rp {balancePrice}
       </span>
     </div>
   );

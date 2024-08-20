@@ -1,5 +1,6 @@
 "use client";
 import { ResponsePayload } from "@/models/user-model";
+import { useDataCart } from "@/store/useDataCart";
 import { useUser } from "@/store/useUser";
 import { User } from "@prisma/client";
 import { useState } from "react";
@@ -14,6 +15,7 @@ export default function Address(props: AddressProps) {
   const { data } = props;
   const { access } = useUser();
   const [value, setValue] = useState<string>(data.address || "");
+  const { empty } = useDataCart();
 
   async function handleAddress() {
     const response = await fetch("/api/user?address=" + value, {
@@ -32,6 +34,8 @@ export default function Address(props: AddressProps) {
       return;
     }
   }
+
+  if (empty) return null;
 
   return (
     <div className="flex min-w-full px-2 py-1 gap-x-2 items-center">

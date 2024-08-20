@@ -27,7 +27,9 @@ export default function BannerMoney(props: BannerMoneyProps) {
           </div>
           <div>
             <h4>Balance</h4>
-            <span className="text-lg font-semibold">Rp. {data.balance}</span>
+            <span className="text-lg font-semibold">
+              Rp. {data.balance.toLocaleString("id-ID")}
+            </span>
           </div>
         </div>
         <div>

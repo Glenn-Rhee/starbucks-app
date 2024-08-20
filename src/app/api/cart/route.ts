@@ -29,11 +29,27 @@ export async function GET(req: NextRequest) {
   let response: ResponsePayload;
   try {
     const token = req.headers.get("bearir");
+    const url = new URL(req.url);
     if (!token) throw new ResponseError(403, "Forbidden! Token is required");
 
-    response = await CartService.getCart(token);
+    response = await CartService.getCart(token, url);
   } catch (error) {
     response = responseError(error);
   }
+  return NextResponse.json(response);
+}
+
+export async function DELETE(req: NextRequest) {
+  let response: ResponsePayload;
+  try {
+    const token = req.headers.get("bearir");
+    const url = new URL(req.url);
+    if (!token) throw new ResponseError(403, "Forbidden! Token is required!");
+
+    response = await CartService.deleteCart(token, url);
+  } catch (error) {
+    response = responseError(error);
+  }
+
   return NextResponse.json(response);
 }

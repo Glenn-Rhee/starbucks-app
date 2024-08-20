@@ -16,7 +16,7 @@ import { useDataCoffe } from "@/store/useDataCoffe";
 
 export default function Total() {
   const { coffeData, setCoffeData } = useDataCoffe();
-  const { data } = useDataCart();
+  const { data, empty } = useDataCart();
   const { access } = useUser();
 
   useEffect(() => {
@@ -46,7 +46,9 @@ export default function Total() {
 
       getDataCOffe();
     }
-  }, [data, access]);
+  }, [data, access, setCoffeData]);
+
+  if (empty) return null;
 
   if (!coffeData) {
     return <Loading className="min-h-[20vh]" />;

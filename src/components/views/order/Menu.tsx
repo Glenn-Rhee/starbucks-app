@@ -54,11 +54,16 @@ export default function Menu() {
         className="w-full shadow-sm shadow-dark/25 mb-2"
         placeholder="Find your coffe"
       />
+      {coffeData?.length === 0 ? (
+        <div className="min-w-full flex items-center justify-center min-h-[20vh]">
+          <h1 className="text-2xl font-semibold text-red-600">No Data</h1>
+        </div>
+      ) : null}
       <div className="bg-white shadow-sm shadow-dark/15 rounded-[5px] flex flex-col gap-y-2">
         {value ? null : <TypeCoffe />}
-        {coffeData?.map((item) => (
-          <CoffeItem key={item.id} data={item} />
-        ))}
+        {coffeData?.length === 0
+          ? null
+          : coffeData?.map((item) => <CoffeItem key={item.id} data={item} />)}
       </div>
     </div>
   ) : (

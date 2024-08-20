@@ -14,7 +14,7 @@ import { FaRegStar } from "react-icons/fa";
 import { User } from "@prisma/client";
 
 interface DataUser extends User {
-  purchased: number;
+  totalPurchased: number;
   favorited: number;
 }
 
@@ -25,7 +25,7 @@ export default function Chart(props: ChartProps) {
   const { data } = props;
 
   const chartData = [
-    { browser: "Purchased", visitors: data.purchased , fill: "#1D4D4F" },
+    { browser: "Purchased", visitors: data.totalPurchased, fill: "#1D4D4F" },
     { browser: "Favorited", visitors: data.favorited, fill: "gray" },
   ];
 

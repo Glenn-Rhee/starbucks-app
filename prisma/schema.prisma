@@ -69,6 +69,7 @@ model Purchased {
   id      String @id @default(cuid())
   idUser  String
   idCoffe String
+  balance Int
   User    User   @relation(fields: [idUser], references: [id])
   Coffe   Coffe  @relation(fields: [idCoffe], references: [id])
 }
@@ -87,7 +88,8 @@ model Coffe {
 }
 
 model Transaction {
-  id        String   @id @default(cuid())
+  id        String   @default(cuid())
+  idCart    String
   idCoffe   String
   idUser    String
   title     String
@@ -96,6 +98,8 @@ model Transaction {
   User      User     @relation(fields: [idUser], references: [id])
   Coffe     Coffe    @relation(fields: [idCoffe], references: [id])
   createdAt DateTime @default(now())
+
+  @@id([idCart, id])
 }
 
 model Cart {
