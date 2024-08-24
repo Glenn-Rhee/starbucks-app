@@ -18,6 +18,12 @@ export class UserValidation {
     password: z.string({ message: "Password is required" }).min(8, {
       message: "Password must be at least 8 characters",
     }),
+    confirmPassword: z
+      .string({ message: "Confirmation password must be a stirng" })
+      .min(8, {
+        message: "Password must be at least 8 characters",
+      })
+      .optional(),
   });
 
   static readonly LOGIN: ZodType = z.object({

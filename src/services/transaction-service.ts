@@ -1,5 +1,8 @@
 import { ResponseError } from "@/error/error";
-import { TransactionRequest } from "@/models/transaction-model";
+import {
+  TransactionGetRequest,
+  TransactionRequest,
+} from "@/models/transaction-model";
 import { ResponsePayload } from "@/models/user-model";
 import { JWTDecoded } from "@/types/jwtTpyes";
 import { prismaClient } from "@/utils/database";
@@ -108,7 +111,11 @@ export class TransactionService {
     if (!decoded) throw new ResponseError(403, "Invalid Token!");
     let data: Transaction[] | [];
     const title = url.searchParams.get("title");
-
+    const day = url.searchParams.get("day");
+    const typeTime = url.searchParams.get("typeTime");
+    const typeTransaction = url.searchParams.get(
+      "typeTransaction"
+    ) as Transaction["status"];
     if (title) {
       data = await prismaClient.transaction.findMany({
         where: {
@@ -117,6 +124,26 @@ export class TransactionService {
           },
         },
       });
+    } else if (day && typeTime && typeTransaction) {
+      const date = +day.split(" ")[1];
+      const dayDate = new Date();
+      dayDate.setDate(dayDate.getDate() - date);
+      data = await prismaClient.transaction.findMany({
+        where: {
+          status: typeTransaction,
+          createdAt: {
+            gte: dayDate,
+          },
+        },
+      });
+
+      if (data.length > 1) {
+        if (typeTime === "Oldest") {
+          data.sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime());
+        } else {
+          data.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+        }
+      }
     } else {
       data = await prismaClient.transaction.findMany({
         where: {

@@ -17,7 +17,7 @@ export default async function HeaderCart() {
   if (data.status === "failed") {
     return <h1>{data.message}</h1>;
   }
-  
+
   const dataUser = data.data as User;
   return (
     <div className="min-w-full px-2 py-2 top-0 scroll-smooth shadow-sm shadow-dark/25 sticky bg-white flex justify-center items-center">
@@ -29,7 +29,7 @@ export default async function HeaderCart() {
       </Link>
       <div className="flex flex-col items-center text-sm">
         <span className="font-bold text-darkGreen text-lg">
-          Drink - {dataUser.address}
+          {dataUser.address ? <span>Drink - {dataUser.address}</span> : "Drink"}
         </span>
       </div>
     </div>
