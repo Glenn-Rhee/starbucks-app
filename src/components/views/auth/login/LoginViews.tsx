@@ -90,7 +90,9 @@ export default function LoginViews() {
       setAccess(token);
       toast("Login " + dataResponse.status, {
         description: dataResponse.message,
+        duration: 2500,
       });
+      setIsLoading(true);
 
       router.push("/");
     } catch (error) {
@@ -101,7 +103,7 @@ export default function LoginViews() {
           updatedDataError(perevDataError, errorMessages)
         );
       } else if (error instanceof Error) {
-        toast("Oops something went wrong", { description: error.message });
+        toast("Failed Login", { description: error.message });
       } else {
         toast("Oops something went wrong", {
           description: "Internal server error",

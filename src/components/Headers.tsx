@@ -42,6 +42,7 @@ export default function Headers() {
 
   if (pathName.includes("/auth/")) return null;
 
+  if (pathName === "/profile/detail") return null;
   async function handleLogout() {
     await fetch("/api/user", {
       method: "DELETE",

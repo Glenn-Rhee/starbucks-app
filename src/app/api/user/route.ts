@@ -1,8 +1,10 @@
 import { ResponseError } from "@/error/error";
 import responseError from "@/error/response-error";
-import { ResponsePayload } from "@/models/user-model";
+import { EditRequest, ResponsePayload } from "@/models/user-model";
 import { UserService } from "@/services/user-service";
 import { getCookie } from "@/utils/cookies";
+import { UserValidation } from "@/validation/user-validation";
+import { Validation } from "@/validation/validation";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -36,10 +38,13 @@ export async function PATCH(req: NextRequest) {
   let response: ResponsePayload;
   try {
     const token = getCookie("token");
+    const body = await req.text();
+    const data = JSON.parse(body) as EditRequest;
     if (!token) throw new ResponseError(403, "Unathorized token is required!");
 
     const url = new URL(req.url);
-    response = await UserService.editUser(token.value, url);
+    Validation.validate(UserValidation.EDIT, data);
+    response = await UserService.editUser(token.value, url, data);
   } catch (error) {
     response = responseError(error);
   }

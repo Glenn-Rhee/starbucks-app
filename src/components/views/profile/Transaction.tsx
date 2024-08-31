@@ -24,7 +24,7 @@ export default function Transaction(props: TransactionProps) {
         <div className="flex flex-col text-dark">
           <span className="font-light text-xs tracking-widest">{label}</span>
           <span className="text-sm font-semibold">
-            Rp {balance.toLocaleString()}
+            Rp {balance.toLocaleString("id-ID")}
           </span>
         </div>
       </div>

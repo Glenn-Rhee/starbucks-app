@@ -18,3 +18,10 @@ export interface LoginRequest {
   email: string;
   password: string;
 }
+
+export interface EditRequest {
+  fullname?: string;
+  username?: string;
+  mobilePhone?: string;
+  email?: string;
+}

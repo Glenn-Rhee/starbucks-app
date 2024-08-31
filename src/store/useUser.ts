@@ -25,3 +25,19 @@ export const useUser = create<UseUser>(
     }
   )
 );
+
+interface UseDetail {
+  value: string;
+  key: string;
+  setValue: (val: string) => void;
+  setKey: (key: string) => void;
+}
+
+export const useDetail = create<UseDetail>((set) => ({
+  value: "",
+  setValue(val) {
+    set({ value: val });
+  },
+  key: "",
+  setKey: (key) => set({ key }),
+}));

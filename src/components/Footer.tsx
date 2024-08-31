@@ -9,6 +9,7 @@ export default function Footer() {
   if (pathName.includes("/order/")) return null;
   if (pathName.includes("/auth/")) return null;
   if (pathName === "/topup") return null;
+  if (pathName === "/profile/detail") return null;
 
   return (
     <footer className="flex justify-evenly w-screen px-4 pt-3 pb-5 items-center bg-white rounded-lg fixed bottom-0 gap-x-3 border-t-2">

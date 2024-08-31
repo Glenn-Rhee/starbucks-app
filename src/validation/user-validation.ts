@@ -34,4 +34,25 @@ export class UserValidation {
       message: "Password must be at least 8 characters",
     }),
   });
+
+  static readonly EDIT: ZodType = z.object({
+    fullname: z.string({ message: "Fullname is required" }).optional(),
+    username: z
+      .string({ message: "Username is required" })
+      .min(5, { message: "Username must be at least 5 characters" })
+      .optional(),
+    email: z
+      .string({ message: "Email is required" })
+      .email({
+        message: "Email is invalid",
+      })
+      .optional(),
+    mobilePhone: z
+      .string({ message: "Mobile Phone is required" })
+      .regex(/^\d*$/, "Mobile Phone must only contain numbers")
+      .min(11, {
+        message: "Mobile Phone must be at least 11 characters",
+      })
+      .optional(),
+  });
 }

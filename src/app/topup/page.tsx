@@ -1,5 +1,6 @@
 "use client";
 import Container from "@/components/Container";
+import ContainerDetail from "@/components/ContainerDetail";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { ResponsePayload } from "@/models/user-model";
@@ -75,8 +76,7 @@ export default function TopuopPage() {
   }
 
   return (
-    <div className="w-full">
-      <div className="w-full min-h-[15vh] bg-mainGreen" />
+    <ContainerDetail>
       <Container className="w-full -mt-12">
         <div className="bg-white rounded-[4px] px-4 py-5 shadow-dark/20 shadow-md">
           <div className="flex flex-col gap-y-1">
@@ -118,6 +118,6 @@ export default function TopuopPage() {
           </button>
         </div>
       </Container>
-    </div>
+    </ContainerDetail>
   );
 }

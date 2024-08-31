@@ -37,7 +37,7 @@ export default function ProfileView(props: ProfileViewProps) {
         <div className="w-full flex flex-col items-center border-b border-dark/15 pb-2">
           <span className="font-bold text-lg text-dark">Starbucks Balance</span>
           <span className="text-sm font-semibold text-mainGreen">
-            Rp {data.balance.toLocaleString()}
+            Rp {data.balance.toLocaleString("id-ID")}
           </span>
         </div>
         <div className="flex justify-between mt-3 gap-x-2 px-2 w-full">
@@ -55,7 +55,11 @@ export default function ProfileView(props: ProfileViewProps) {
         </div>
       </div>
       <div className="flex flex-col gap-y-2 py-2 bg-white rounded-[6px] shadow-md min-w-full mt-5">
-        <ItemProfile label="Change Profile Picture">
+        <ItemProfile
+          label="Change Profile Picture"
+          keyDetail="Profile Picture"
+          value={data.linkProfilePicture || ""}
+        >
           <Image
             src={"/profile-pict.jpg"}
             width={40}
@@ -64,16 +68,28 @@ export default function ProfileView(props: ProfileViewProps) {
             className="rounded-full"
           />
         </ItemProfile>
-        <ItemProfile label="Fullname">
+        <ItemProfile
+          label="Fullname"
+          value={data.fullname}
+          keyDetail="Fullname"
+        >
           <Title>{data.fullname}</Title>
         </ItemProfile>
-        <ItemProfile label="Username">
+        <ItemProfile
+          label="Username"
+          keyDetail="Username"
+          value={data.username}
+        >
           <Title>{data.username}</Title>
         </ItemProfile>
-        <ItemProfile label="Change Mobile Number">
+        <ItemProfile
+          label="Change Mobile Number"
+          keyDetail="Mobile Phone"
+          value={data.mobilePhone}
+        >
           <Title>{phoneNumber}</Title>
         </ItemProfile>
-        <ItemProfile label="Email">
+        <ItemProfile label="Email" value={data.email} keyDetail="Email">
           <Title>{email}</Title>
         </ItemProfile>
       </div>

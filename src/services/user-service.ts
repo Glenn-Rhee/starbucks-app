@@ -1,5 +1,6 @@
 import { ResponseError } from "@/error/error";
 import {
+  EditRequest,
   LoginRequest,
   ResponsePayload,
   SignupRequest,
@@ -103,7 +104,11 @@ export class UserService {
     };
   }
 
-  static async editUser(token: string, url: URL): Promise<ResponsePayload> {
+  static async editUser(
+    token: string,
+    url: URL,
+    data?: EditRequest
+  ): Promise<ResponsePayload> {
     const decoded = JWT.decoded(token) as JWTDecoded;
     if (!decoded) throw new ResponseError(403, "Forbidden!! Unknown user");
     const address = url.searchParams.get("address");
@@ -114,14 +119,27 @@ export class UserService {
     });
 
     if (!dataUser) throw new ResponseError(404, "User is not found!");
-    await prismaClient.user.update({
-      where: {
-        id: dataUser.id,
-      },
-      data: {
-        address,
-      },
-    });
+    if (address) {
+      await prismaClient.user.update({
+        where: {
+          id: dataUser.id,
+        },
+        data: {
+          address,
+        },
+      });
+    }
+
+    if (data) {
+      console.log("Ok");
+
+      await prismaClient.user.update({
+        where: {
+          id: dataUser.id,
+        },
+        data,
+      });
+    }
 
     return {
       status: "success",
